@@ -27,14 +27,14 @@ import java.util.List;
  *
  */
 @Config
-public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
+public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {//austin is a skibidi rizzler
     public static double TICKS_PER_REV = 2000;
     public static double WHEEL_RADIUS = 0.629921; // in
     public static double FRONTWHEEL_RADIUS = 0.944882;
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
-    public static double LATERAL_DISTANCE =14.125; // in; distance between the left and right wheels
-    public static double FORWARD_OFFSET = 2.25; // in; offset of the lateral wheel
+    public static double LATERAL_DISTANCE =9.85; // in; distance between the left and right wheels
+    public static double FORWARD_OFFSET = 1; // in; offset of the lateral wheel
 
     private Encoder leftEncoder, rightEncoder, frontEncoder;
 
@@ -50,14 +50,14 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         lastEncPositions = lastTrackingEncPositions;
         lastEncVels = lastTrackingEncVels;
 
-        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "pow"));
-        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "bsd"));
-        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "fsd"));
+        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "fpd"));
+        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "bpd"));
+        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "bsd"));
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
-        leftEncoder.setDirection(Encoder.Direction.REVERSE);
-        rightEncoder.setDirection(Encoder.Direction.REVERSE);
-        frontEncoder.setDirection(Encoder.Direction.REVERSE);
+        leftEncoder.setDirection(Encoder.Direction.FORWARD);
+        rightEncoder.setDirection(Encoder.Direction.FORWARD);
+        frontEncoder.setDirection(Encoder.Direction.FORWARD);
     }
 
     public static double encoderTicksToInches(double ticks) {
@@ -66,12 +66,12 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        double X_MULTIPLIER = 1.001984; // Multiplier in the X direction
+        double X_MULTIPLIER = 0.99887; // Multiplier in the X direction
         //118.3302 3.00556
         //118.6509 3.0137
         //118.056  2.9986
         //77.8657
-        double Y_MULTIPLIER = 1.53099; // Multiplier in the Y direction
+        double Y_MULTIPLIER = 1.49416; // Multiplier in the Y direction
         //76.9345, 1.9541363
         //77.5472, 1.9697
         //76.5299, 1.94385
