@@ -26,21 +26,29 @@ public class hardwareMapV2 {
     public static HashMap<String, Integer> suitcasePositions = new HashMap<>();
     public static HashMap<String, Double> elbowPositions = new HashMap<>();
     public static double intakeStarPower = -1;
-    public static double intakePortPower = 1;
-    public static double outakeStarPower = 1;
-    public static double outakePortPower = -1;
-
+    public static double intakePortPower = -1;
+    public static double outakeStarPower = -intakeStarPower;
+    public static double outakePortPower = -intakePortPower;
+    public static HashMap<String, Double> wristPositions = new HashMap<>();
+    public static HashMap<String, Integer> suitcasePositionsPort = new HashMap<>();
     public hardwareMapV2() {}
     public void runOpMode() {}
-
+// l rizz
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
-        suitcasePositions.put("up", 1500);
-        suitcasePositions.put("mid", 750);
+        suitcasePositions.put("up", 1150);
+        suitcasePositions.put("mid", 475);
         suitcasePositions.put("down", 0);
-        elbowPositions.put("up", 0.6);
-        elbowPositions.put("mid", 0.5);
-        elbowPositions.put("down", 0.4);
+        suitcasePositionsPort.put("up", 580);
+        suitcasePositionsPort.put("mid", 250);
+        suitcasePositionsPort.put("down", 0);
+        elbowPositions.put("down", 0.75);//Adrian is playing with adhd toys
+        elbowPositions.put("mid", 0.5);//austin hates straight things
+        elbowPositions.put("up", 0.0);
+        wristPositions.put("left",0.9);
+        wristPositions.put("mid", 0.36);
+        wristPositions.put("right", 0.09);
+
         fpd = hwMap.get(DcMotorEx.class, "fpd" );
         bpd = hwMap.get(DcMotorEx.class, "bpd");
         fsd = hwMap.get(DcMotorEx.class, "fsd");
@@ -51,6 +59,7 @@ public class hardwareMapV2 {
         starSuitcase = hwMap.get(DcMotorEx.class, "starSuitcase");
         elbowPort = hwMap.get(Servo.class, "portElbow");
         elbowStar = hwMap.get(Servo.class, "starElbow");
+        wrist = hwMap.get(Servo.class,"wrist");
         mcLarenDaddyPort = hwMap.get(CRServo.class,"portFinger");
         mcLarenDaddyStar = hwMap.get(CRServo.class, "starFinger");
         colorSensorHand = hwMap.get(ColorSensor.class, "colorSensorHand");
@@ -62,8 +71,8 @@ public class hardwareMapV2 {
         bsd.setDirection(DcMotorSimple.Direction.REVERSE);
         portSuitcase.setDirection(DcMotorSimple.Direction.FORWARD);
         starSuitcase.setDirection(DcMotorSimple.Direction.REVERSE);
-        portArm.setDirection(DcMotorSimple.Direction.FORWARD);
-        starArm.setDirection(DcMotorSimple.Direction.REVERSE);
+        portArm.setDirection(DcMotorSimple.Direction.REVERSE);
+        starArm.setDirection(DcMotorSimple.Direction.FORWARD);
         fpd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bpd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fsd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -72,6 +81,10 @@ public class hardwareMapV2 {
         starArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         portSuitcase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         starSuitcase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        portSuitcase.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        starSuitcase.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        portSuitcase.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        starSuitcase.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         fpd.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bpd.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -79,7 +92,8 @@ public class hardwareMapV2 {
         bsd.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         portArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         starArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        portSuitcase.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        portSuitcase.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         starSuitcase.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
     }
 }
