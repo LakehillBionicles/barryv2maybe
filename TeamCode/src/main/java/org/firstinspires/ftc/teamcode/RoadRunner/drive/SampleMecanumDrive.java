@@ -20,6 +20,7 @@ import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityCons
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
@@ -108,8 +109,10 @@ public class SampleMecanumDrive extends MecanumDrive {
         // TODO: reverse any motors using DcMotor.setDirection()
 
 //austin is a nerd teeheehee
-        leftFront.setDirection(DcMotorEx.Direction.REVERSE); // add if needed
-        leftRear.setDirection(DcMotorEx.Direction.REVERSE); // add if needed
+        leftFront.setDirection(DcMotorEx.Direction.FORWARD); // add if needed
+        leftRear.setDirection(DcMotorEx.Direction.FORWARD); // add if needed
+        rightFront.setDirection(DcMotorEx.Direction.REVERSE);
+        rightRear.setDirection(DcMotorEx.Direction.REVERSE);
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
         List<Integer> lastTrackingEncVels = new ArrayList<>();
 

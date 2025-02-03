@@ -188,6 +188,7 @@ public class roombaBotTeleOpRed extends teleBase {
                     }
                 }
             }
+
             //Timers :(
             if(timerCheck(backUpTimer,0.2,0.7, runtime)){
                 elbowPos = "mid";

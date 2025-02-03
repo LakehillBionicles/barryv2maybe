@@ -184,4 +184,8 @@ public class teleBase extends LinearOpMode {
         masterMotor.setTargetPosition(target);
         slaveMotor.setTargetPosition(masterMotor.getTargetPosition()-masterMotor.getCurrentPosition());
     }
+    public void distanceSensorGrab(ColorSensor colorSensor, DcMotorEx fpd, DcMotorEx bpd, DcMotorEx fsd, DcMotorEx bsd){
+
+
+    }
 }
