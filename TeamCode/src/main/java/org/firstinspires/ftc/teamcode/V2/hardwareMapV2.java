@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.V2;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.AnalogSensor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,6 +19,7 @@ public class hardwareMapV2 {
     public Servo elbowPort = null, elbowStar = null, wrist;
     public CRServo mcLarenDaddyPort=null, mcLarenDaddyStar = null;
     public ColorSensor colorSensorHand = null;
+    public AnalogInput disanceSensor =null;
     HardwareMap hwMap = null;
     public static double elbowPortDown = 0.475;
     public static double elbowPortUp = 0.62;
@@ -36,16 +39,16 @@ public class hardwareMapV2 {
 // l rizz
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
-        suitcasePositions.put("up", 1150);
+        suitcasePositions.put("up", 1350);
         suitcasePositions.put("mid", 475);
         suitcasePositions.put("down", 0);
         suitcasePositionsPort.put("up", 580);
         suitcasePositionsPort.put("mid", 250);
         suitcasePositionsPort.put("down", 0);
-        elbowPositions.put("down", 0.75);//Adrian is playing with adhd toys
-        elbowPositions.put("mid", 0.5);//austin hates straight things
-        elbowPositions.put("up", 0.0);
-        wristPositions.put("left",0.9);
+        elbowPositions.put("up", 0.63);
+        elbowPositions.put("mid", 0.5);
+        elbowPositions.put("down", 0.395);//austin is a nerdy nerd hahahahaha//
+        wristPositions.put("left",0.7);
         wristPositions.put("mid", 0.36);
         wristPositions.put("right", 0.09);
 
@@ -63,6 +66,7 @@ public class hardwareMapV2 {
         mcLarenDaddyPort = hwMap.get(CRServo.class,"portFinger");
         mcLarenDaddyStar = hwMap.get(CRServo.class, "starFinger");
         colorSensorHand = hwMap.get(ColorSensor.class, "colorSensorHand");
+        disanceSensor = hwMap.get(AnalogInput.class, "distanceSensor");
         mcLarenDaddyPort.setDirection(DcMotorSimple.Direction.FORWARD);
         mcLarenDaddyStar.setDirection(DcMotorSimple.Direction.REVERSE);
         fpd.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -77,6 +81,8 @@ public class hardwareMapV2 {
         bpd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fsd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bsd.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        portArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        starArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         portArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         starArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         portSuitcase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

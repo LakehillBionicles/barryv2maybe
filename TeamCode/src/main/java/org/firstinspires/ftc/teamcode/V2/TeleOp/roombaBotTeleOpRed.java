@@ -34,7 +34,7 @@ public class roombaBotTeleOpRed extends teleBase {
     public String suitcasePos = "down";
     public int portSuitcaseError = 0;
     public int starSuitcaseError = 0;
-    public String elbowPos = "up";
+    public String elbowPos = "mid";
     public boolean manualMode = false;
     public double manualModeTimer = -20;
     public double backUpTimer = -20;
@@ -156,7 +156,7 @@ public class roombaBotTeleOpRed extends teleBase {
             }else{
                 //!colorSensorDetect(robot.colorSensorHand, 200, 200, 200).equals("red"
                 if(gamepad1.x||(timerCheck(intakeArmOnTimer, -0.1, 1, runtime)&&suitcasePos.equals("down"))){
-                    if(!colorSensorDetect(robot.colorSensorHand, 200, 200, 200).equals("red")&& !(robot.colorSensorHand.green() >150)){
+                    if(!colorSensorDetect(robot.colorSensorHand, 200, 200, 100).equals("red")&& !(robot.colorSensorHand.green() >150)){
                         mclarenDaddyStatus = "intake 154";
                         intake();
                     }else{
@@ -218,15 +218,20 @@ public class roombaBotTeleOpRed extends teleBase {
                 setDrivePower();
                 setArmPower();
             }
+            if(robot.starArm.getCurrentPosition()>900&&suitcasePos.equals("down")){
+                robot.starArm.setPower(-0.5);
+                robot.portArm.setPower(-0.5);
+            }
             telemetry.addData("starHeight",robot.starSuitcase.getCurrentPosition()); //austin is a good teacher
             telemetry.addData("portHeight", robot.portSuitcase.getCurrentPosition());
             telemetry.addData("portArmHeigh", robot.portArm.getCurrentPosition());
-            telemetry.addData("starArmHeight", robot.starArm.getCurrentPosition());
+            telemetry.addData("starArmHeight", robot.starArm.getCurrentPosition());//Austinius Rutherfordius Maximus
             telemetry.addData("manualMode", manualMode);
             telemetry.addData("gamepad1.left_stick_x", gamepad1.left_stick_x);
             telemetry.addData("mclarenDaddyStatus", mclarenDaddyStatus);
             telemetry.addData("armPower", (suitcasePositions.get(suitcasePos)-robot.starSuitcase.getCurrentPosition())*(1/528));
             telemetry.addData("autoDescore", autoDescoreTimer);
+            telemetry.addData("distance", robot.disanceSensor.getVoltage());
             telemetry.update();
             robot.elbowPort.setPosition(elbowPositions.get(elbowPos));
             robot.elbowStar.setPosition(1-elbowPositions.get(elbowPos));
