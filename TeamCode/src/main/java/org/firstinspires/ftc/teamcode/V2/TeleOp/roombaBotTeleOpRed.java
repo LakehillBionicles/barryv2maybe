@@ -52,10 +52,14 @@ public class roombaBotTeleOpRed extends teleBase {
     public String mclarenDaddyStatus = "nothing";
     public double autoScoreTimer = -20;
     public double autoDescoreTimer = -20;
-    public static double pterm = -1.5;
+    public static double pterm = -0.8;
     public static double pterm2 = -0.5;
     public double intakeArmOnTimer = -20;
     public double elbowUpTimer = -20;
+    public static double fpd = 1;
+    public static double bpd = 1;
+    public static double fsd = 1;
+    public static double bsd = 1;
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -196,12 +200,22 @@ public class roombaBotTeleOpRed extends teleBase {
                 setDrivePower();
                 armPower(-0.2);
             }else if(timerCheck(backUpTimer, 0.7, 1.3, runtime)){
-                armPower(-1);
-                wheelPowers(-0.8,-0.8,-0.8,-0.8);
+                armPower(-0.8);
+                wheelPowers(-1,-1,-1,-1);
             }else if(timerCheck(backUpTimer, 1.3, 1.6, runtime)) {
                 wheelPowers(1,1,-1,-1);
-                suitcasePos = "up";
+                suitcasePos = "down";
                 elbowPos = "mid";
+            }else if(timerCheck(backUpTimer, 1.6, 2, runtime)) {
+                wheelPowers(1,1,1,1);
+                suitcasePos = "down";
+                armPower(1);
+                elbowPos = "down";
+            }else if(timerCheck(backUpTimer, 2, 2.3, runtime)) {
+                suitcasePos = "down";
+                outake();
+                armPower(-1);
+                elbowPos = "down";
             }else if(timerCheck(autoDescoreTimer, 0.5, 1, runtime)){
                 elbowPos = "down";
                 armPower(-1);
@@ -217,11 +231,7 @@ public class roombaBotTeleOpRed extends teleBase {
             else{
                 setDrivePower();
                 setArmPower();
-            }
-            if(robot.starArm.getCurrentPosition()>900&&suitcasePos.equals("down")){
-                robot.starArm.setPower(-0.5);
-                robot.portArm.setPower(-0.5);
-            }
+            }//chaos incarnate gremlins are here
             telemetry.addData("starHeight",robot.starSuitcase.getCurrentPosition()); //austin is a good teacher
             telemetry.addData("portHeight", robot.portSuitcase.getCurrentPosition());
             telemetry.addData("portArmHeigh", robot.portArm.getCurrentPosition());
@@ -236,6 +246,12 @@ public class roombaBotTeleOpRed extends teleBase {
             robot.elbowPort.setPosition(elbowPositions.get(elbowPos));
             robot.elbowStar.setPosition(1-elbowPositions.get(elbowPos));
             robot.wrist.setPosition(wristPositions.get(wristPos));
+            /*robot.fpd.setPower(robot.fpd.getPower()*fpd);
+            robot.fsd.setPower(robot.fsd.getPower()*fsd);
+            robot.bpd.setPower(robot.bpd.getPower()*bpd);
+            robot.bsd.setPower(robot.bsd.getPower()*bsd);
+
+             */
         }
     }//Zesty hands
     private void intake(){

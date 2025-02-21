@@ -39,7 +39,7 @@ public class hardwareMapV2 {
 // l rizz
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
-        suitcasePositions.put("up", 1350);
+        suitcasePositions.put("up", 1400);
         suitcasePositions.put("mid", 475);
         suitcasePositions.put("down", 0);
         suitcasePositionsPort.put("up", 580);
@@ -47,7 +47,7 @@ public class hardwareMapV2 {
         suitcasePositionsPort.put("down", 0);
         elbowPositions.put("up", 0.63);
         elbowPositions.put("mid", 0.5);
-        elbowPositions.put("down", 0.395);//austin is a nerdy nerd hahahahaha//
+        elbowPositions.put("down", 0.4075);//austin is a nerdy nerd hahahahaha//
         wristPositions.put("left",0.7);
         wristPositions.put("mid", 0.36);
         wristPositions.put("right", 0.09);
